@@ -21,4 +21,24 @@ public class SimpleTreeTest {
       Assertions.assertEquals(root, child.Parent);
     }
   }
+
+  @Nested
+  @DisplayName("DeleteNode method")
+  class DeleteNode {
+    @Test
+    @DisplayName("Deletes node")
+    void deletesNode() {
+      SimpleTreeNode<Integer> root = new SimpleTreeNode<Integer>(0, null);
+      SimpleTree<Integer> tree = new SimpleTree<Integer>(root);
+      SimpleTreeNode<Integer> child = new SimpleTreeNode<Integer>(1, null);
+      SimpleTreeNode<Integer> subchild = new SimpleTreeNode<Integer>(1, null);
+
+      tree.AddChild(root, child);
+      tree.AddChild(child, subchild);
+
+      tree.DeleteNode(child);
+
+      Assertions.assertNull(root.Children);
+    }
+  }
 }

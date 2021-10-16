@@ -19,6 +19,13 @@ class SimpleTree<T> {
 
   public void DeleteNode(SimpleTreeNode<T> NodeToDelete) {
     // ваш код удаления существующего узла NodeToDelete
+    NodeToDelete.Parent.Children.remove(NodeToDelete);
+
+    if (NodeToDelete.Parent.Children.size() == 0) {
+      NodeToDelete.Parent.Children = null;
+    }
+
+    NodeToDelete.Parent = null;
   }
 
   public List<SimpleTreeNode<T>> GetAllNodes() {
