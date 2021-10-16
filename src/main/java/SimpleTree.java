@@ -82,7 +82,7 @@ class SimpleTree<T> {
 
   public int Count() {
     // количество всех узлов в дереве
-    return 0;
+    return this.GetAllNodes().size();
   }
 
   public int LeafCount() {
