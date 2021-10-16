@@ -49,9 +49,27 @@ class SimpleTree<T> {
     return GetNodes(Root, nodes);
   }
 
+  private List<SimpleTreeNode<T>> FindNodes(T val, SimpleTreeNode<T> node, List<SimpleTreeNode<T>> nodes) {
+    if (node.NodeValue == val) {
+      nodes.add(node);
+    }
+
+    if (node.Children == null) {
+      return nodes;
+    }
+
+    for (SimpleTreeNode<T> child : node.Children) {
+      FindNodes(val, child, nodes);
+    }
+
+    return nodes;
+  }
+
   public List<SimpleTreeNode<T>> FindNodesByValue(T val) {
     // ваш код поиска узлов по значению
-    return null;
+    List<SimpleTreeNode<T>> nodes = new ArrayList<SimpleTreeNode<T>>();
+
+    return FindNodes(val, Root, nodes);
   }
 
   public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent) {

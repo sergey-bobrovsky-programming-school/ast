@@ -68,4 +68,31 @@ public class SimpleTreeTest {
       Assertions.assertEquals(6, tree.GetAllNodes().size());
     }
   }
+
+  @Nested
+  @DisplayName("FindNodesByValue method")
+  class FindNodesByValue {
+    @Test
+    @DisplayName("Finds nodes")
+    void findsNodes() {
+      SimpleTreeNode<Integer> root = new SimpleTreeNode<Integer>(0, null);
+      SimpleTree<Integer> tree = new SimpleTree<Integer>(root);
+
+      SimpleTreeNode<Integer> child1 = new SimpleTreeNode<Integer>(1, null);
+      SimpleTreeNode<Integer> child2 = new SimpleTreeNode<Integer>(0, null);
+      SimpleTreeNode<Integer> child3 = new SimpleTreeNode<Integer>(1, null);
+
+      SimpleTreeNode<Integer> subchild1 = new SimpleTreeNode<Integer>(0, null);
+      SimpleTreeNode<Integer> subchild2 = new SimpleTreeNode<Integer>(5, null);
+
+      tree.AddChild(root, child1);
+      tree.AddChild(root, child2);
+      tree.AddChild(root, child3);
+
+      tree.AddChild(child1, subchild1);
+      tree.AddChild(child2, subchild2);
+
+      Assertions.assertEquals(3, tree.FindNodesByValue(0).size());
+    }
+  }
 }
