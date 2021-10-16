@@ -95,4 +95,36 @@ public class SimpleTreeTest {
       Assertions.assertEquals(3, tree.FindNodesByValue(0).size());
     }
   }
+
+  @Nested
+  @DisplayName("MoveNode method")
+  class MoveNode {
+    @Test
+    @DisplayName("Move node")
+    void moveNode() {
+      SimpleTreeNode<Integer> root = new SimpleTreeNode<Integer>(0, null);
+      SimpleTree<Integer> tree = new SimpleTree<Integer>(root);
+
+      SimpleTreeNode<Integer> child1 = new SimpleTreeNode<Integer>(1, null);
+      SimpleTreeNode<Integer> child2 = new SimpleTreeNode<Integer>(0, null);
+      SimpleTreeNode<Integer> child3 = new SimpleTreeNode<Integer>(1, null);
+
+      SimpleTreeNode<Integer> subchild1 = new SimpleTreeNode<Integer>(0, null);
+      SimpleTreeNode<Integer> subchild2 = new SimpleTreeNode<Integer>(5, null);
+
+      tree.AddChild(root, child1);
+      tree.AddChild(root, child2);
+      tree.AddChild(root, child3);
+
+      tree.AddChild(child1, subchild1);
+      tree.AddChild(child2, subchild2);
+
+      tree.MoveNode(child1, subchild2);
+
+      Assertions.assertEquals(2, root.Children.size());
+      Assertions.assertEquals(subchild2, child1.Parent);
+      Assertions.assertEquals(1, subchild2.Children.size());
+      Assertions.assertEquals(child1, subchild2.Children.iterator().next());
+    }
+  }
 }
