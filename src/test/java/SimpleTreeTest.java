@@ -41,4 +41,31 @@ public class SimpleTreeTest {
       Assertions.assertNull(root.Children);
     }
   }
+
+  @Nested
+  @DisplayName("GetAllNodes method")
+  class GetAllNodes {
+    @Test
+    @DisplayName("Gets all nodes")
+    void getsAllNodes() {
+      SimpleTreeNode<Integer> root = new SimpleTreeNode<Integer>(0, null);
+      SimpleTree<Integer> tree = new SimpleTree<Integer>(root);
+
+      SimpleTreeNode<Integer> child1 = new SimpleTreeNode<Integer>(1, null);
+      SimpleTreeNode<Integer> child2 = new SimpleTreeNode<Integer>(1, null);
+      SimpleTreeNode<Integer> child3 = new SimpleTreeNode<Integer>(1, null);
+
+      SimpleTreeNode<Integer> subchild1 = new SimpleTreeNode<Integer>(1, null);
+      SimpleTreeNode<Integer> subchild2 = new SimpleTreeNode<Integer>(1, null);
+
+      tree.AddChild(root, child1);
+      tree.AddChild(root, child2);
+      tree.AddChild(root, child3);
+
+      tree.AddChild(child1, subchild1);
+      tree.AddChild(child2, subchild2);
+
+      Assertions.assertEquals(6, tree.GetAllNodes().size());
+    }
+  }
 }

@@ -28,9 +28,25 @@ class SimpleTree<T> {
     NodeToDelete.Parent = null;
   }
 
+  private List<SimpleTreeNode<T>> GetNodes(SimpleTreeNode<T> node, List<SimpleTreeNode<T>> nodes) {
+    nodes.add(node);
+
+    if (node.Children == null) {
+      return nodes;
+    }
+
+    for (SimpleTreeNode<T> child : node.Children) {
+      GetNodes(child, nodes);
+    }
+
+    return nodes;
+  }
+
   public List<SimpleTreeNode<T>> GetAllNodes() {
     // ваш код выдачи всех узлов дерева в определённом порядке
-    return null;
+    List<SimpleTreeNode<T>> nodes = new ArrayList<SimpleTreeNode<T>>();
+
+    return GetNodes(Root, nodes);
   }
 
   public List<SimpleTreeNode<T>> FindNodesByValue(T val) {
