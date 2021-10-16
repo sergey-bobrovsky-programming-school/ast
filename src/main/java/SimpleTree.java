@@ -87,6 +87,14 @@ class SimpleTree<T> {
 
   public int LeafCount() {
     // количество листьев в дереве
-    return 0;
+    List<SimpleTreeNode<T>> nodes = this.GetAllNodes();
+
+    for (Iterator<SimpleTreeNode<T>> it = nodes.iterator(); it.hasNext();) {
+      if (it.next().Children != null) {
+        it.remove();
+      }
+    }
+
+    return nodes.size();
   }
 }
