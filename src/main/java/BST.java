@@ -96,7 +96,18 @@ class BST<T> {
     return false; // если узел не найден
   }
 
+  private int CountNodes(int accumulator, BSTNode<T> node) {
+    if (node.LeftChild == null && node.RightChild == null) {
+      return accumulator + 1;
+    }
+
+    int leftAccumulator = node.LeftChild != null ? CountNodes(accumulator, node.LeftChild) : 0;
+    int rightAccumulator = node.RightChild != null ? CountNodes(accumulator, node.RightChild) : 0;
+
+    return accumulator + leftAccumulator + rightAccumulator + 1;
+  }
+
   public int Count() {
-    return 0; // количество узлов в дереве
+    return CountNodes(0, this.Root); // количество узлов в дереве
   }
 }

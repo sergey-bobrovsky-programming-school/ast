@@ -76,4 +76,24 @@ public class BSTTest {
       Assertions.assertEquals(false, result.ToLeft);
     }
   }
+
+  // @Nested
+  // @DisplayName("AddKeyValue")
+  // class AddKeyValue {
+  //   @Test
+  //   @DisplayName("")
+
+  // }
+
+  @Nested
+  @DisplayName("Count")
+  class Count {
+    @Test
+    @DisplayName("Counts nodes")
+    void countsNodes() {
+      BST<Integer> tree = FakeTree.buildTree();
+
+      Assertions.assertEquals(7, tree.Count());
+    }
+  }
 }
