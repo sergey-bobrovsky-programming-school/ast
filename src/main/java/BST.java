@@ -79,11 +79,21 @@ class BST<T> {
 
   public boolean AddKeyValue(int key, T val) {
     // добавляем ключ-значение в дерево
+    BSTFind<T> searchResult = FindNodeByKey(key);
 
-    // сделать поиск
-    // добавить
+    if (searchResult.NodeHasKey == true) {
+      return false; // если ключ уже есть
+    }
 
-    return false; // если ключ уже есть
+    if (searchResult.ToLeft == true) {
+      searchResult.Node.LeftChild = new BSTNode<T>(key, val, searchResult.Node);
+    }
+
+    if (searchResult.ToLeft == false) {
+      searchResult.Node.RightChild = new BSTNode<T>(key, val, searchResult.Node);
+    }
+
+    return true;
   }
 
   public BSTNode<T> FinMinMax(BSTNode<T> FromNode, boolean FindMax) {

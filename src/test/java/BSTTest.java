@@ -77,19 +77,58 @@ public class BSTTest {
     }
   }
 
-  // @Nested
-  // @DisplayName("AddKeyValue")
-  // class AddKeyValue {
-  //   @Test
-  //   @DisplayName("")
+  @Nested
+  @DisplayName("AddKeyValue")
+  class AddKeyValue {
+    @Test
+    @DisplayName("Adds left node.")
+    void addsLeftNode() {
+      BST<Integer> tree = FakeTree.buildTree();
 
-  // }
+      boolean result = tree.AddKeyValue(80, 80);
+
+      Assertions.assertTrue(result);
+      Assertions.assertEquals(8, tree.Count());
+
+      BSTFind<Integer> searchResult = tree.FindNodeByKey(80);
+
+      Assertions.assertEquals(80, searchResult.Node.NodeKey);
+      Assertions.assertEquals(searchResult.Node, searchResult.Node.Parent.LeftChild);
+    }
+
+    @Test
+    @DisplayName("Adds right node.")
+    void addsRightNode() {
+      BST<Integer> tree = FakeTree.buildTree();
+
+      boolean result = tree.AddKeyValue(110, 110);
+
+      Assertions.assertTrue(result);
+      Assertions.assertEquals(8, tree.Count());
+
+      BSTFind<Integer> searchResult = tree.FindNodeByKey(110);
+
+      Assertions.assertEquals(110, searchResult.Node.NodeKey);
+      Assertions.assertEquals(searchResult.Node, searchResult.Node.Parent.RightChild);
+    }
+
+    @Test
+    @DisplayName("Does not add existing node.")
+    void doesNotAddExistingNode() {
+      BST<Integer> tree = FakeTree.buildTree();
+
+      boolean result = tree.AddKeyValue(105, 105);
+
+      Assertions.assertFalse(result);
+      Assertions.assertEquals(7, tree.Count());
+    }
+  }
 
   @Nested
   @DisplayName("Count")
   class Count {
     @Test
-    @DisplayName("Counts nodes")
+    @DisplayName("Counts nodes.")
     void countsNodes() {
       BST<Integer> tree = FakeTree.buildTree();
 
