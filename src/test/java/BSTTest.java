@@ -125,6 +125,54 @@ public class BSTTest {
   }
 
   @Nested
+  @DisplayName("FinMinMax")
+  class FinMinMax {
+    @Test
+    @DisplayName("Finds min key from root")
+    void findsMinKeyFromRoot() {
+      BST<Integer> tree = FakeTree.buildTree();
+
+      BSTNode<Integer> node = tree.FindMinMax(tree.Root, false);
+
+      Assertions.assertEquals(85, node.NodeKey);
+    }
+
+    @Test
+    @DisplayName("Finds min key from node")
+    void findsMinKeyFromNode() {
+      BST<Integer> tree = FakeTree.buildTree();
+
+      BSTFind<Integer> searchResult = tree.FindNodeByKey(105);
+
+      BSTNode<Integer> node = tree.FindMinMax(searchResult.Node, false);
+
+      Assertions.assertEquals(103, node.NodeKey);
+    }
+
+    @Test
+    @DisplayName("Finds max key from root")
+    void findsMaxKeyFromRoot() {
+      BST<Integer> tree = FakeTree.buildTree();
+
+      BSTNode<Integer> node = tree.FindMinMax(tree.Root, true);
+
+      Assertions.assertEquals(108, node.NodeKey);
+    }
+
+    @Test
+    @DisplayName("Finds max key from node")
+    void findsMaxKeyFromNode() {
+      BST<Integer> tree = FakeTree.buildTree();
+
+      BSTFind<Integer> searchResult = tree.FindNodeByKey(95);
+
+      BSTNode<Integer> node = tree.FindMinMax(searchResult.Node, true);
+
+      Assertions.assertEquals(98, node.NodeKey);
+    }
+  }
+
+  @Nested
   @DisplayName("Count")
   class Count {
     @Test
