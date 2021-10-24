@@ -59,7 +59,7 @@ class BST<T> {
       return result;
     }
 
-    if (key > node.NodeKey && node.RightChild == null) {
+    if (key >= node.NodeKey && node.RightChild == null) {
       BSTFind<T> result = new BSTFind<T>();
 
       result.Node = node;
