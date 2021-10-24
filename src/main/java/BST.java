@@ -121,9 +121,129 @@ class BST<T> {
     return FindMin(FromNode);
   }
 
+  private boolean isLeftChild(BSTNode<T> node) {
+    if (node.Parent == null) {
+      return false;
+    }
+
+    if (node.Parent.LeftChild == node) {
+      return true;
+    }
+
+    return false;
+  }
+
+  private boolean isRightChild(BSTNode<T> node) {
+    if (node.Parent == null) {
+      return false;
+    }
+
+    if (node.Parent.RightChild == node) {
+      return true;
+    }
+
+    return false;
+  }
+
+  private boolean isLeaf(BSTNode<T> node) {
+    if (node.LeftChild == null && node.RightChild == null) {
+      return true;
+    }
+
+    return false;
+  }
+
+  private void DeleteLeaf(BSTFind<T> searchResult) {
+    if (isLeftChild(searchResult.Node)) {
+      searchResult.Node.Parent.LeftChild = null;
+    }
+
+    if (isRightChild(searchResult.Node)) {
+      searchResult.Node.Parent.RightChild = null;
+    }
+
+    searchResult.Node.Parent = null;
+  }
+
+  private void DeleteNodeWithRightChild(BSTFind<T> searchResult) {
+    BSTNode<T> rightChild = searchResult.Node.RightChild;
+
+    System.out.println("rightChild.NodeKey: " + rightChild.NodeKey);
+
+    BSTNode<T> smallestLeftChild = this.FindMin(rightChild);
+
+    System.out.println("smallestLeftChild.NodeKey: " + smallestLeftChild.NodeKey);
+
+    if (isLeaf(smallestLeftChild)) {
+      System.out.println("LEAF CASE");
+
+      if (isLeftChild(searchResult.Node)) {
+        searchResult.Node.Parent.LeftChild = smallestLeftChild;
+      }
+
+      if (isRightChild(searchResult.Node)) {
+        searchResult.Node.Parent.RightChild = smallestLeftChild;
+      }
+
+      smallestLeftChild.Parent.LeftChild = null;
+      smallestLeftChild.Parent = searchResult.Node.Parent;
+      smallestLeftChild.RightChild = searchResult.Node.RightChild;
+
+      return;
+    }
+
+    smallestLeftChild.RightChild.Parent = smallestLeftChild.Parent;
+    smallestLeftChild.Parent.LeftChild = smallestLeftChild.RightChild;
+
+    if (isLeftChild(searchResult.Node)) {
+      searchResult.Node.Parent.LeftChild = smallestLeftChild;
+    }
+
+    if (isRightChild(searchResult.Node)) {
+      searchResult.Node.Parent.RightChild = smallestLeftChild;
+    }
+
+    smallestLeftChild.Parent = searchResult.Node.Parent;
+    smallestLeftChild.RightChild = searchResult.Node.RightChild;
+    smallestLeftChild.LeftChild = searchResult.Node.LeftChild;
+
+    searchResult.Node.Parent = null;
+  }
+
+  private void DeleteNodeWithLeftChild(BSTFind<T> searchResult) {
+    if (isLeftChild(searchResult.Node)) {
+      searchResult.Node.Parent.LeftChild = searchResult.Node.LeftChild;
+    }
+
+    if (isRightChild(searchResult.Node)) {
+      searchResult.Node.Parent.RightChild = searchResult.Node.LeftChild;
+    }
+
+    searchResult.Node.LeftChild.Parent = searchResult.Node.Parent;
+    searchResult.Node.Parent = null;
+  }
+
   public boolean DeleteNodeByKey(int key) {
     // удаляем узел по ключу
-    return false; // если узел не найден
+    BSTFind<T> searchResult = FindNodeByKey(key);
+
+    if (searchResult.NodeHasKey == false) {
+      return false; // если узел не найден
+    }
+
+    if (searchResult.Node.LeftChild == null && searchResult.Node.RightChild == null) {
+      DeleteLeaf(searchResult);
+    }
+
+    if (searchResult.Node.LeftChild != null && searchResult.Node.RightChild == null) {
+      DeleteNodeWithLeftChild(searchResult);
+    }
+
+    if (searchResult.Node.RightChild != null) {
+      DeleteNodeWithRightChild(searchResult);
+    }
+
+    return true;
   }
 
   private int CountNodes(int accumulator, BSTNode<T> node) {
