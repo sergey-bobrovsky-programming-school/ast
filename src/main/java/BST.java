@@ -167,16 +167,9 @@ class BST<T> {
 
   private void DeleteNodeWithRightChild(BSTFind<T> searchResult) {
     BSTNode<T> rightChild = searchResult.Node.RightChild;
-
-    System.out.println("rightChild.NodeKey: " + rightChild.NodeKey);
-
     BSTNode<T> smallestLeftChild = this.FindMin(rightChild);
 
-    System.out.println("smallestLeftChild.NodeKey: " + smallestLeftChild.NodeKey);
-
     if (isLeaf(smallestLeftChild)) {
-      System.out.println("LEAF CASE");
-
       if (isLeftChild(searchResult.Node)) {
         searchResult.Node.Parent.LeftChild = smallestLeftChild;
       }
