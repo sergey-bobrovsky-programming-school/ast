@@ -112,13 +112,13 @@ class BST<T> {
     return FindMax(node.RightChild);
   }
 
-  public BSTNode<T> FindMinMax(BSTNode<T> FromNode, boolean isMax) {
+  public BSTNode<T> FindMinMax(BSTNode<T> initialNode, boolean isMax) {
     // ищем максимальный/минимальный ключ в поддереве
     if (isMax == true) {
-      return FindMax(FromNode);
+      return FindMax(initialNode);
     }
 
-    return FindMin(FromNode);
+    return FindMin(initialNode);
   }
 
   private boolean isLeftChild(BSTNode<T> node) {
