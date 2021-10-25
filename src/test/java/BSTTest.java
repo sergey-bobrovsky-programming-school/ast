@@ -132,7 +132,7 @@ public class BSTTest {
     void findsMinKeyFromRoot() {
       BST<Integer> tree = FakeTree.buildTree();
 
-      BSTNode<Integer> node = tree.FindMinMax(tree.Root, false);
+      BSTNode<Integer> node = tree.FinMinMax(tree.Root, false);
 
       Assertions.assertEquals(85, node.NodeKey);
     }
@@ -144,7 +144,7 @@ public class BSTTest {
 
       BSTFind<Integer> searchResult = tree.FindNodeByKey(105);
 
-      BSTNode<Integer> node = tree.FindMinMax(searchResult.Node, false);
+      BSTNode<Integer> node = tree.FinMinMax(searchResult.Node, false);
 
       Assertions.assertEquals(103, node.NodeKey);
     }
@@ -154,7 +154,7 @@ public class BSTTest {
     void findsMaxKeyFromRoot() {
       BST<Integer> tree = FakeTree.buildTree();
 
-      BSTNode<Integer> node = tree.FindMinMax(tree.Root, true);
+      BSTNode<Integer> node = tree.FinMinMax(tree.Root, true);
 
       Assertions.assertEquals(108, node.NodeKey);
     }
@@ -166,7 +166,7 @@ public class BSTTest {
 
       BSTFind<Integer> searchResult = tree.FindNodeByKey(95);
 
-      BSTNode<Integer> node = tree.FindMinMax(searchResult.Node, true);
+      BSTNode<Integer> node = tree.FinMinMax(searchResult.Node, true);
 
       Assertions.assertEquals(98, node.NodeKey);
     }
