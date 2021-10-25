@@ -226,15 +226,17 @@ class BST<T> {
 
     if (searchResult.Node.LeftChild == null && searchResult.Node.RightChild == null) {
       DeleteLeaf(searchResult);
+
+      return true;
     }
 
     if (searchResult.Node.LeftChild != null && searchResult.Node.RightChild == null) {
       DeleteNodeWithLeftChild(searchResult);
+
+      return true;
     }
 
-    if (searchResult.Node.RightChild != null) {
-      DeleteNodeWithRightChild(searchResult);
-    }
+    DeleteNodeWithRightChild(searchResult);
 
     return true;
   }
