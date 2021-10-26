@@ -81,6 +81,22 @@ public class BSTTest {
   @DisplayName("AddKeyValue")
   class AddKeyValue {
     @Test
+    @DisplayName("Adds node to the empty tree.")
+    void addsNodeToTheEmptyTree() {
+      BST<Integer> tree = new BST<Integer>(null);
+
+      boolean result = tree.AddKeyValue(80, 80);
+
+      Assertions.assertTrue(result);
+      Assertions.assertEquals(1, tree.Count());
+
+      BSTFind<Integer> searchResult = tree.FindNodeByKey(80);
+
+      Assertions.assertTrue(searchResult.NodeHasKey);
+      Assertions.assertEquals(80, searchResult.Node.NodeKey);
+    }
+
+    @Test
     @DisplayName("Adds left node.")
     void addsLeftNode() {
       BST<Integer> tree = FakeTree.buildTree();
