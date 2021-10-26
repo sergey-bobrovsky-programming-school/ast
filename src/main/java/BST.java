@@ -154,6 +154,12 @@ class BST<T> {
   }
 
   private void DeleteLeaf(BSTFind<T> searchResult) {
+    if (searchResult.Node == this.Root) {
+      this.Root = null;
+
+      return;
+    }
+
     if (isLeftChild(searchResult.Node)) {
       searchResult.Node.Parent.LeftChild = null;
     }
@@ -253,6 +259,12 @@ class BST<T> {
   }
 
   public int Count() {
-    return CountNodes(0, this.Root); // количество узлов в дереве
+    int initialValue = 0;
+
+    if (this.Root == null) {
+      return initialValue;
+    }
+
+    return CountNodes(initialValue, this.Root); // количество узлов в дереве
   }
 }

@@ -187,6 +187,24 @@ public class BSTTest {
     }
 
     @Test
+    @DisplayName("Deletes all nodes.")
+    void deletesAllNodes() {
+      BST<Integer> tree = FakeTree.buildTree();
+
+      tree.DeleteNodeByKey(85);
+      tree.DeleteNodeByKey(98);
+      tree.DeleteNodeByKey(95);
+
+      tree.DeleteNodeByKey(103);
+      tree.DeleteNodeByKey(108);
+      tree.DeleteNodeByKey(105);
+
+      tree.DeleteNodeByKey(100);
+
+      Assertions.assertEquals(0, tree.Count());
+    }
+
+    @Test
     @DisplayName("Deletes leaf node.")
     void deletesLeafNode() {
       BST<Integer> tree = FakeTree.buildTree();
