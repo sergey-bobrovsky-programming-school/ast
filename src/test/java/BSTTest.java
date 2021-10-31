@@ -203,6 +203,185 @@ public class BSTTest {
     }
 
     @Test
+    @DisplayName("Deletes root node.")
+    void deletesRootNode() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
+
+      Assertions.assertEquals(1, tree.Count());
+
+      boolean result = tree.DeleteNodeByKey(100);
+
+      Assertions.assertTrue(result);
+      Assertions.assertEquals(0, tree.Count());
+    }
+
+    @Test
+    @DisplayName("Deletes node without children.")
+    void deletesLeafNode() {
+      BST<Integer> tree = FakeTree.buildTree();
+
+      boolean result = tree.DeleteNodeByKey(108);
+
+      Assertions.assertTrue(result);
+      Assertions.assertEquals(6, tree.Count());
+      Assertions.assertEquals(false, tree.FindNodeByKey(108).NodeHasKey);
+    }
+
+    @Test
+    @DisplayName("Deletes node with only left child.")
+    void deletesNodeWithOnlyLeftChild() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
+
+      tree.AddKeyValue(90, 90);
+      tree.AddKeyValue(110, 110);
+      tree.AddKeyValue(105, 105);
+      tree.AddKeyValue(103, 103);
+      tree.AddKeyValue(107, 107);
+
+      Assertions.assertEquals(6, tree.Count());
+
+      tree.DeleteNodeByKey(110);
+
+      BSTFind<Integer> searchResult = tree.FindNodeByKey(110);
+
+      Assertions.assertEquals(5, tree.Count());
+      Assertions.assertFalse(searchResult.NodeHasKey);
+
+      BSTFind<Integer> searchResult105 = tree.FindNodeByKey(105);
+
+      Assertions.assertEquals(100, searchResult105.Node.Parent.NodeKey);
+      Assertions.assertEquals(105, searchResult105.Node.Parent.RightChild.NodeKey);
+      Assertions.assertEquals(103, searchResult105.Node.LeftChild.NodeKey);
+      Assertions.assertEquals(107, searchResult105.Node.RightChild.NodeKey);
+    }
+
+    @Test
+    @DisplayName("Deletes node with only right child.")
+    void deletesNodeWithOnlyRightChild() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
+
+      tree.AddKeyValue(90, 90);
+      tree.AddKeyValue(110, 110);
+      tree.AddKeyValue(120, 120);
+      tree.AddKeyValue(115, 115);
+      tree.AddKeyValue(125, 125);
+
+      Assertions.assertEquals(6, tree.Count());
+
+      boolean result = tree.DeleteNodeByKey(110);
+
+      BSTFind<Integer> searchResult = tree.FindNodeByKey(110);
+
+      Assertions.assertTrue(result);
+      Assertions.assertEquals(5, tree.Count());
+      Assertions.assertFalse(searchResult.NodeHasKey);
+
+      BSTFind<Integer> searchResult115 = tree.FindNodeByKey(115);
+
+      Assertions.assertEquals(100, searchResult115.Node.Parent.NodeKey);
+      Assertions.assertEquals(120, searchResult115.Node.RightChild.NodeKey);
+    }
+
+    @Test
+    @DisplayName("Deletes node with only right child. Smallest child - node.")
+    void deletesNodeWithOnlyRightChildSmallestChildNode() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
+
+      tree.AddKeyValue(90, 90);
+      tree.AddKeyValue(110, 110);
+      tree.AddKeyValue(120, 120);
+      tree.AddKeyValue(115, 115);
+      tree.AddKeyValue(125, 125);
+      tree.AddKeyValue(117, 117);
+
+      Assertions.assertEquals(7, tree.Count());
+
+      boolean result = tree.DeleteNodeByKey(110);
+
+      BSTFind<Integer> searchResult = tree.FindNodeByKey(110);
+
+      Assertions.assertTrue(result);
+      Assertions.assertEquals(6, tree.Count());
+      Assertions.assertFalse(searchResult.NodeHasKey);
+
+      BSTFind<Integer> searchResult115 = tree.FindNodeByKey(115);
+
+      Assertions.assertEquals(100, searchResult115.Node.Parent.NodeKey);
+      Assertions.assertEquals(120, searchResult115.Node.RightChild.NodeKey);
+      Assertions.assertEquals(117, searchResult115.Node.RightChild.LeftChild.NodeKey);
+
+      BSTFind<Integer> searchResult117 = tree.FindNodeByKey(117);
+
+      Assertions.assertEquals(120, searchResult117.Node.Parent.NodeKey);
+    }
+
+    @Test
+    @DisplayName("Deletes node with right and left child.")
+    void deletesNodeWithRightAndLeftChild() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
+
+      tree.AddKeyValue(90, 90);
+      tree.AddKeyValue(110, 110);
+      tree.AddKeyValue(105, 105);
+      tree.AddKeyValue(120, 120);
+      tree.AddKeyValue(125, 125);
+      tree.AddKeyValue(115, 115);
+
+      Assertions.assertEquals(7, tree.Count());
+
+      boolean result = tree.DeleteNodeByKey(110);
+
+      BSTFind<Integer> searchResult = tree.FindNodeByKey(110);
+
+      Assertions.assertTrue(result);
+      Assertions.assertEquals(6, tree.Count());
+      Assertions.assertFalse(searchResult.NodeHasKey);
+
+      BSTFind<Integer> searchResult115 = tree.FindNodeByKey(115);
+
+      Assertions.assertEquals(100, searchResult115.Node.Parent.NodeKey);
+      Assertions.assertEquals(105, searchResult115.Node.LeftChild.NodeKey);
+      Assertions.assertEquals(120, searchResult115.Node.RightChild.NodeKey);
+    }
+
+    @Test
+    @DisplayName("Deletes node with right and left child. Smallest child - node.")
+    void deletesNodeWithRightAndLeftChildSmallestChildNode() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
+
+      tree.AddKeyValue(90, 90);
+      tree.AddKeyValue(110, 110);
+      tree.AddKeyValue(105, 105);
+      tree.AddKeyValue(120, 120);
+      tree.AddKeyValue(115, 115);
+      tree.AddKeyValue(125, 125);
+      tree.AddKeyValue(117, 117);
+
+      Assertions.assertEquals(8, tree.Count());
+
+      boolean result = tree.DeleteNodeByKey(110);
+
+      BSTFind<Integer> searchResult = tree.FindNodeByKey(110);
+
+      Assertions.assertTrue(result);
+      Assertions.assertFalse(searchResult.NodeHasKey);
+      Assertions.assertEquals(7, tree.Count());
+
+      BSTFind<Integer> searchResult115 = tree.FindNodeByKey(115);
+
+      Assertions.assertEquals(100, searchResult115.Node.Parent.NodeKey);
+      Assertions.assertEquals(105, searchResult115.Node.LeftChild.NodeKey);
+      Assertions.assertEquals(120, searchResult115.Node.RightChild.NodeKey);
+      Assertions.assertEquals(117, searchResult115.Node.RightChild.LeftChild.NodeKey);
+    }
+
+    @Test
     @DisplayName("Deletes all nodes.")
     void deletesAllNodes() {
       BST<Integer> tree = FakeTree.buildTree();
@@ -218,68 +397,6 @@ public class BSTTest {
       tree.DeleteNodeByKey(100);
 
       Assertions.assertEquals(0, tree.Count());
-    }
-
-    @Test
-    @DisplayName("Deletes leaf node.")
-    void deletesLeafNode() {
-      BST<Integer> tree = FakeTree.buildTree();
-
-      boolean result = tree.DeleteNodeByKey(108);
-
-      Assertions.assertTrue(result);
-      Assertions.assertEquals(6, tree.Count());
-      Assertions.assertEquals(false, tree.FindNodeByKey(108).NodeHasKey);
-    }
-
-    @Test
-    @DisplayName("Deletes node which has only left child.")
-    void deletesNodeWhichHasOnlyLeftChild() {
-      BST<Integer> tree = FakeTree.buildTree();
-
-      tree.AddKeyValue(106, 106);
-
-      boolean result = tree.DeleteNodeByKey(108);
-
-      Assertions.assertTrue(result);
-      Assertions.assertEquals(7, tree.Count());
-      Assertions.assertEquals(false, tree.FindNodeByKey(108).NodeHasKey);
-    }
-
-    @Test
-    @DisplayName("Deletes node which has right child (leaf case).")
-    void deletesNodeWhichHasOnlyRightChildLeafCase() {
-      BST<Integer> tree = FakeTree.buildTree();
-
-      tree.AddKeyValue(115, 115);
-      tree.AddKeyValue(110, 110);
-      tree.AddKeyValue(120, 120);
-      tree.AddKeyValue(109, 109);
-      tree.AddKeyValue(112, 112);
-
-      boolean result = tree.DeleteNodeByKey(108);
-
-      Assertions.assertTrue(result);
-      Assertions.assertEquals(11, tree.Count());
-      Assertions.assertEquals(false, tree.FindNodeByKey(108).NodeHasKey);
-    }
-
-    @Test
-    @DisplayName("Deletes node which has right child (node case).")
-    void deletesNodeWhichHasOnlyRightChildNodeCase() {
-      BST<Integer> tree = FakeTree.buildTree();
-
-      tree.AddKeyValue(120, 120);
-      tree.AddKeyValue(106, 106);
-      tree.AddKeyValue(115, 115);
-      tree.AddKeyValue(125, 125);
-      tree.AddKeyValue(118, 118);
-
-      boolean result = tree.DeleteNodeByKey(108);
-
-      Assertions.assertTrue(result);
-      Assertions.assertEquals(11, tree.Count());
-      Assertions.assertEquals(false, tree.FindNodeByKey(108).NodeHasKey);
     }
   }
 
