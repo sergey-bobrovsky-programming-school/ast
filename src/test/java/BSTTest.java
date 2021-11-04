@@ -486,18 +486,77 @@ public class BSTTest {
     }
   }
 
-  // @Nested
-  // @DisplayName("WideAllNodes")
-  // class WideAllNodes {
-  //   @Test
-  //   @DisplayName("Returns root node")
-  //   void returnsRootNode() {
-  //     BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
-  //     BST<Integer> tree = new BST<Integer>(root);
+  @Nested
+  @DisplayName("WideAllNodes")
+  class WideAllNodes {
+    @Test
+    @DisplayName("Returns root node")
+    void returnsRootNode() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
 
-  //     ArrayList<BSTNode<Integer>> result = tree.WideAllNodes();
+      ArrayList<BSTNode<Integer>> result = tree.WideAllNodes();
 
-  //     Assertions.assertEquals(1, result.size());
-  //   }
-  // }
+      Assertions.assertEquals(1, result.size());
+    }
+
+    @Test
+    @DisplayName("Returns 3 nodes")
+    void returnsThreeNodes() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
+
+      tree.AddKeyValue(80, 80);
+      tree.AddKeyValue(120, 120);
+
+      ArrayList<BSTNode<Integer>> result = tree.WideAllNodes();
+
+      BSTFind<Integer> searchResult100 = tree.FindNodeByKey(100);
+      BSTFind<Integer> searchResult80 = tree.FindNodeByKey(80);
+      BSTFind<Integer> searchResult120 = tree.FindNodeByKey(120);
+
+      Assertions.assertEquals(3, result.size());
+      Assertions.assertEquals(searchResult100.Node.NodeKey, result.get(0).NodeKey);
+      Assertions.assertEquals(searchResult80.Node.NodeKey, result.get(1).NodeKey);
+      Assertions.assertEquals(searchResult120.Node.NodeKey, result.get(2).NodeKey);
+    }
+
+    @Test
+    @DisplayName("Returns 7 nodes")
+    void returnsSevenNodes() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
+
+      tree.AddKeyValue(80, 80);
+      tree.AddKeyValue(120, 120);
+
+      tree.AddKeyValue(70, 70);
+      tree.AddKeyValue(90, 90);
+
+      tree.AddKeyValue(110, 110);
+      tree.AddKeyValue(130, 130);
+
+      ArrayList<BSTNode<Integer>> result = tree.WideAllNodes();
+
+      BSTFind<Integer> searchResult100 = tree.FindNodeByKey(100);
+
+      BSTFind<Integer> searchResult80 = tree.FindNodeByKey(80);
+      BSTFind<Integer> searchResult120 = tree.FindNodeByKey(120);
+
+      BSTFind<Integer> searchResult70 = tree.FindNodeByKey(70);
+      BSTFind<Integer> searchResult90 = tree.FindNodeByKey(90);
+
+      BSTFind<Integer> searchResult110 = tree.FindNodeByKey(110);
+      BSTFind<Integer> searchResult130 = tree.FindNodeByKey(130);
+
+      Assertions.assertEquals(7, result.size());
+      Assertions.assertEquals(searchResult100.Node.NodeKey, result.get(0).NodeKey);
+      Assertions.assertEquals(searchResult80.Node.NodeKey, result.get(1).NodeKey);
+      Assertions.assertEquals(searchResult120.Node.NodeKey, result.get(2).NodeKey);
+      Assertions.assertEquals(searchResult70.Node.NodeKey, result.get(3).NodeKey);
+      Assertions.assertEquals(searchResult90.Node.NodeKey, result.get(4).NodeKey);
+      Assertions.assertEquals(searchResult110.Node.NodeKey, result.get(5).NodeKey);
+      Assertions.assertEquals(searchResult130.Node.NodeKey, result.get(6).NodeKey);
+    }
+  }
 }

@@ -317,16 +317,20 @@ class BST<T> {
     return currentNodes;
   }
 
-  private ArrayList<BSTNode<T>> WideAll(int maxDepth, int currentDepth, ArrayList<BSTNode<T>> accumulator) {
-    if (currentDepth > maxDepth) {
+  private ArrayList<BSTNode<T>> WideAll(int currentDepth, ArrayList<BSTNode<T>> accumulator) {
+    ArrayList<BSTNode<T>> currentDepthNodes = GetNodesByDepth(currentDepth);
+
+    if (currentDepthNodes.size() == 0) {
       return accumulator;
     }
 
-    return accumulator;
+    accumulator.addAll(currentDepthNodes);
+
+    return this.WideAll(currentDepth + 1, accumulator);
   }
 
   public ArrayList<BSTNode<T>> WideAllNodes() {
-    ArrayList<BSTNode<T>> nodes = this.WideAll(0, 0, new ArrayList<BSTNode<T>>());
+    ArrayList<BSTNode<T>> nodes = this.WideAll(1, new ArrayList<BSTNode<T>>());
 
     return nodes;
   }
