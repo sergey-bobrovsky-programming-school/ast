@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -411,4 +413,91 @@ public class BSTTest {
       Assertions.assertEquals(7, tree.Count());
     }
   }
+
+  @Nested
+  @DisplayName("GetNodesByDepth")
+  class GetNodesByDepth {
+    @Test
+    @DisplayName("Returns empty list")
+    void returnsEmpty() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
+
+      ArrayList<BSTNode<Integer>> result = tree.GetNodesByDepth(0);
+
+      Assertions.assertEquals(0, result.size());
+    }
+
+    @Test
+    @DisplayName("Returns root node")
+    void returnsRootNode() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
+
+      ArrayList<BSTNode<Integer>> result = tree.GetNodesByDepth(1);
+
+      Assertions.assertEquals(1, result.size());
+      Assertions.assertEquals(root, result.iterator().next());
+    }
+
+    @Test
+    @DisplayName("Returns 2 level nodes")
+    void returnsSecondLevelNodes() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
+
+      tree.AddKeyValue(80, 80);
+      tree.AddKeyValue(120, 120);
+
+      ArrayList<BSTNode<Integer>> result = tree.GetNodesByDepth(2);
+
+      BSTFind<Integer> searchResult80 = tree.FindNodeByKey(80);
+      BSTFind<Integer> searchResult120 = tree.FindNodeByKey(120);
+
+      Assertions.assertEquals(2, result.size());
+      Assertions.assertEquals(searchResult80.Node.NodeKey, result.get(0).NodeKey);
+      Assertions.assertEquals(searchResult120.Node.NodeKey, result.get(1).NodeKey);
+    }
+
+    @Test
+    @DisplayName("Returns 3 level nodes")
+    void returnsThirdLevelNodes() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
+
+      tree.AddKeyValue(80, 80);
+      tree.AddKeyValue(120, 120);
+
+      tree.AddKeyValue(90, 90);
+
+      tree.AddKeyValue(110, 110);
+      tree.AddKeyValue(130, 130);
+
+      ArrayList<BSTNode<Integer>> result = tree.GetNodesByDepth(3);
+
+      BSTFind<Integer> searchResult90 = tree.FindNodeByKey(90);
+      BSTFind<Integer> searchResult110 = tree.FindNodeByKey(110);
+      BSTFind<Integer> searchResult130 = tree.FindNodeByKey(130);
+
+      Assertions.assertEquals(3, result.size());
+      Assertions.assertEquals(searchResult90.Node.NodeKey, result.get(0).NodeKey);
+      Assertions.assertEquals(searchResult110.Node.NodeKey, result.get(1).NodeKey);
+      Assertions.assertEquals(searchResult130.Node.NodeKey, result.get(2).NodeKey);
+    }
+  }
+
+  // @Nested
+  // @DisplayName("WideAllNodes")
+  // class WideAllNodes {
+  //   @Test
+  //   @DisplayName("Returns root node")
+  //   void returnsRootNode() {
+  //     BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+  //     BST<Integer> tree = new BST<Integer>(root);
+
+  //     ArrayList<BSTNode<Integer>> result = tree.WideAllNodes();
+
+  //     Assertions.assertEquals(1, result.size());
+  //   }
+  // }
 }

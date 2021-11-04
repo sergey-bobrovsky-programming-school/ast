@@ -288,4 +288,46 @@ class BST<T> {
 
     return CountNodes(initialValue, this.Root); // количество узлов в дереве
   }
+
+  public ArrayList<BSTNode<T>> GetNodesByDepth(int depth) {
+    ArrayList<BSTNode<T>> currentNodes = new ArrayList<BSTNode<T>>();
+
+    if (depth == 0) {
+      return currentNodes;
+    }
+
+    currentNodes.add(this.Root);
+
+    for (int i = 1; i < depth; i++) {
+      ArrayList<BSTNode<T>> nextNodes = new ArrayList<BSTNode<T>>();
+
+      for (BSTNode<T> node : currentNodes) {
+        if (node.LeftChild != null) {
+          nextNodes.add(node.LeftChild);
+        }
+
+        if (node.RightChild != null) {
+          nextNodes.add(node.RightChild);
+        }
+      }
+
+      currentNodes = nextNodes;
+    }
+
+    return currentNodes;
+  }
+
+  private ArrayList<BSTNode<T>> WideAll(int maxDepth, int currentDepth, ArrayList<BSTNode<T>> accumulator) {
+    if (currentDepth > maxDepth) {
+      return accumulator;
+    }
+
+    return accumulator;
+  }
+
+  public ArrayList<BSTNode<T>> WideAllNodes() {
+    ArrayList<BSTNode<T>> nodes = this.WideAll(0, 0, new ArrayList<BSTNode<T>>());
+
+    return nodes;
+  }
 }
