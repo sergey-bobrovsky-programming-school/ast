@@ -335,13 +335,21 @@ class BST<T> {
     return nodes;
   }
 
-  private ArrayList<BSTNode> DeepAllNodesInorder(ArrayList<BSTNode> accumulator, BSTNode node) {
+  private ArrayList<BSTNode> DeepAllNodesInOrder(ArrayList<BSTNode> accumulator, BSTNode node, int mode) {
     if (node == null) {
       return accumulator;
     }
 
-    ArrayList<BSTNode> leftNodes = DeepAllNodesInorder(new ArrayList<BSTNode>(), node.LeftChild);
-    ArrayList<BSTNode> rightNodes = DeepAllNodesInorder(new ArrayList<BSTNode>(), node.RightChild);
+    ArrayList<BSTNode> leftNodes = DeepAllNodesInOrder(new ArrayList<BSTNode>(), node.LeftChild, mode);
+    ArrayList<BSTNode> rightNodes = DeepAllNodesInOrder(new ArrayList<BSTNode>(), node.RightChild, mode);
+
+    if (mode == 1) {
+      accumulator.addAll(leftNodes);
+      accumulator.addAll(rightNodes);
+      accumulator.add(node);
+
+      return accumulator;
+    }
 
     accumulator.addAll(leftNodes);
     accumulator.add(node);
@@ -351,7 +359,7 @@ class BST<T> {
   }
 
   public ArrayList<BSTNode> DeepAllNodes(int mode) {
-    ArrayList<BSTNode> nodes = DeepAllNodesInorder(new ArrayList<BSTNode>(), this.Root);
+    ArrayList<BSTNode> nodes = DeepAllNodesInOrder(new ArrayList<BSTNode>(), this.Root, mode);
 
     return nodes;
   }

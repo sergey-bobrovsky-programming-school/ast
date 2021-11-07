@@ -589,5 +589,32 @@ public class BSTTest {
       Assertions.assertEquals(120, result.get(5).NodeKey);
       Assertions.assertEquals(130, result.get(6).NodeKey);
     }
+
+    @Test
+    @DisplayName("Return nodes in post-order")
+    void returnNodesInPostOrder() {
+      BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
+      BST<Integer> tree = new BST<Integer>(root);
+
+      tree.AddKeyValue(80, 80);
+      tree.AddKeyValue(120, 120);
+
+      tree.AddKeyValue(70, 70);
+      tree.AddKeyValue(90, 90);
+
+      tree.AddKeyValue(110, 110);
+      tree.AddKeyValue(130, 130);
+
+      ArrayList<BSTNode> result = tree.DeepAllNodes(1);
+
+      Assertions.assertEquals(7, result.size());
+      Assertions.assertEquals(70, result.get(0).NodeKey);
+      Assertions.assertEquals(90, result.get(1).NodeKey);
+      Assertions.assertEquals(80, result.get(2).NodeKey);
+      Assertions.assertEquals(110, result.get(3).NodeKey);
+      Assertions.assertEquals(130, result.get(4).NodeKey);
+      Assertions.assertEquals(120, result.get(5).NodeKey);
+      Assertions.assertEquals(100, result.get(6).NodeKey);
+    }
   }
 }
