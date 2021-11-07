@@ -423,7 +423,7 @@ public class BSTTest {
       BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
       BST<Integer> tree = new BST<Integer>(root);
 
-      ArrayList<BSTNode<Integer>> result = tree.GetNodesByDepth(0);
+      ArrayList<BSTNode> result = tree.GetNodesByDepth(0);
 
       Assertions.assertEquals(0, result.size());
     }
@@ -434,7 +434,7 @@ public class BSTTest {
       BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
       BST<Integer> tree = new BST<Integer>(root);
 
-      ArrayList<BSTNode<Integer>> result = tree.GetNodesByDepth(1);
+      ArrayList<BSTNode> result = tree.GetNodesByDepth(1);
 
       Assertions.assertEquals(1, result.size());
       Assertions.assertEquals(root, result.iterator().next());
@@ -449,7 +449,7 @@ public class BSTTest {
       tree.AddKeyValue(80, 80);
       tree.AddKeyValue(120, 120);
 
-      ArrayList<BSTNode<Integer>> result = tree.GetNodesByDepth(2);
+      ArrayList<BSTNode> result = tree.GetNodesByDepth(2);
 
       BSTFind<Integer> searchResult80 = tree.FindNodeByKey(80);
       BSTFind<Integer> searchResult120 = tree.FindNodeByKey(120);
@@ -473,7 +473,7 @@ public class BSTTest {
       tree.AddKeyValue(110, 110);
       tree.AddKeyValue(130, 130);
 
-      ArrayList<BSTNode<Integer>> result = tree.GetNodesByDepth(3);
+      ArrayList<BSTNode> result = tree.GetNodesByDepth(3);
 
       BSTFind<Integer> searchResult90 = tree.FindNodeByKey(90);
       BSTFind<Integer> searchResult110 = tree.FindNodeByKey(110);
@@ -495,7 +495,7 @@ public class BSTTest {
       BSTNode<Integer> root = new BSTNode<Integer>(100, 100, null);
       BST<Integer> tree = new BST<Integer>(root);
 
-      ArrayList<BSTNode<Integer>> result = tree.WideAllNodes();
+      ArrayList<BSTNode> result = tree.WideAllNodes();
 
       Assertions.assertEquals(1, result.size());
     }
@@ -509,7 +509,7 @@ public class BSTTest {
       tree.AddKeyValue(80, 80);
       tree.AddKeyValue(120, 120);
 
-      ArrayList<BSTNode<Integer>> result = tree.WideAllNodes();
+      ArrayList<BSTNode> result = tree.WideAllNodes();
 
       BSTFind<Integer> searchResult100 = tree.FindNodeByKey(100);
       BSTFind<Integer> searchResult80 = tree.FindNodeByKey(80);
@@ -536,7 +536,7 @@ public class BSTTest {
       tree.AddKeyValue(110, 110);
       tree.AddKeyValue(130, 130);
 
-      ArrayList<BSTNode<Integer>> result = tree.WideAllNodes();
+      ArrayList<BSTNode> result = tree.WideAllNodes();
 
       BSTFind<Integer> searchResult100 = tree.FindNodeByKey(100);
 

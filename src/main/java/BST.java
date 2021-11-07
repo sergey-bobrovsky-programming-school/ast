@@ -289,8 +289,8 @@ class BST<T> {
     return CountNodes(initialValue, this.Root); // количество узлов в дереве
   }
 
-  public ArrayList<BSTNode<T>> GetNodesByDepth(int depth) {
-    ArrayList<BSTNode<T>> currentNodes = new ArrayList<BSTNode<T>>();
+  public ArrayList<BSTNode> GetNodesByDepth(int depth) {
+    ArrayList<BSTNode> currentNodes = new ArrayList<BSTNode>();
 
     if (depth == 0) {
       return currentNodes;
@@ -299,7 +299,7 @@ class BST<T> {
     currentNodes.add(this.Root);
 
     for (int i = 1; i < depth; i++) {
-      ArrayList<BSTNode<T>> nextNodes = new ArrayList<BSTNode<T>>();
+      ArrayList<BSTNode> nextNodes = new ArrayList<BSTNode>();
 
       for (BSTNode<T> node : currentNodes) {
         if (node.LeftChild != null) {
@@ -317,8 +317,8 @@ class BST<T> {
     return currentNodes;
   }
 
-  private ArrayList<BSTNode<T>> WideAll(int currentDepth, ArrayList<BSTNode<T>> accumulator) {
-    ArrayList<BSTNode<T>> currentDepthNodes = GetNodesByDepth(currentDepth);
+  private ArrayList<BSTNode> WideAll(int currentDepth, ArrayList<BSTNode> accumulator) {
+    ArrayList<BSTNode> currentDepthNodes = GetNodesByDepth(currentDepth);
 
     if (currentDepthNodes.size() == 0) {
       return accumulator;
@@ -329,8 +329,8 @@ class BST<T> {
     return this.WideAll(currentDepth + 1, accumulator);
   }
 
-  public ArrayList<BSTNode<T>> WideAllNodes() {
-    ArrayList<BSTNode<T>> nodes = this.WideAll(1, new ArrayList<BSTNode<T>>());
+  public ArrayList<BSTNode> WideAllNodes() {
+    ArrayList<BSTNode> nodes = this.WideAll(1, new ArrayList<BSTNode>());
 
     return nodes;
   }
