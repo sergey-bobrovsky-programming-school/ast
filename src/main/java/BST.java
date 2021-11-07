@@ -351,6 +351,14 @@ class BST<T> {
       return accumulator;
     }
 
+    if (mode == 2) {
+      accumulator.add(node);
+      accumulator.addAll(leftNodes);
+      accumulator.addAll(rightNodes);
+
+      return accumulator;
+    }
+
     accumulator.addAll(leftNodes);
     accumulator.add(node);
     accumulator.addAll(rightNodes);
