@@ -23,9 +23,39 @@ class aBST {
     return getSize(maxDepth, newDepth, newSize);
   }
 
+  private Integer FindByKey(int key, int index) {
+    if (index > Tree.length - 1) {
+      return null;
+    }
+
+    if (this.Tree[index] == null) {
+      return null;
+    }
+
+    if (key == this.Tree[index]) {
+      return index;
+    }
+
+    int leftChildIndex = 2 * index + 1;
+    int rightChildIndex = 2 * index + 2;
+
+    Integer leftChildResult = FindByKey(key, leftChildIndex);
+    Integer rightChildResult = FindByKey(key, rightChildIndex);
+
+    if (leftChildResult != null) {
+      return leftChildResult;
+    }
+
+    if (rightChildResult != null) {
+      return rightChildResult;
+    }
+
+    return null;
+  }
+
   public Integer FindKeyIndex(int key) {
     // ищем в массиве индекс ключа
-    return null; // не найден
+    return FindByKey(key, 0);
   }
 
   public int AddKey(int key) {

@@ -34,7 +34,7 @@ public class aBSTTest {
   @DisplayName("CreateTree")
   class CreateTree {
     @Test
-    @DisplayName("Creates tree with size 1")
+    @DisplayName("Creates tree with size 1.")
     void createsTreeWithSize1() {
       aBST tree = new aBST(0);
 
@@ -42,7 +42,7 @@ public class aBSTTest {
     }
 
     @Test
-    @DisplayName("Creates tree with size 3")
+    @DisplayName("Creates tree with size 3.")
     void createsTreeWithSize3() {
       aBST tree = new aBST(1);
 
@@ -50,7 +50,7 @@ public class aBSTTest {
     }
 
     @Test
-    @DisplayName("Creates tree with size 7")
+    @DisplayName("Creates tree with size 7.")
     void createsTreeWithSize7() {
       aBST tree = new aBST(2);
 
@@ -58,7 +58,7 @@ public class aBSTTest {
     }
 
     @Test
-    @DisplayName("Creates tree with size 15")
+    @DisplayName("Creates tree with size 15.")
     void createsTreeWithSize15() {
       aBST tree = new aBST(3);
 
@@ -66,7 +66,7 @@ public class aBSTTest {
     }
 
     @Test
-    @DisplayName("Creates tree with size 31")
+    @DisplayName("Creates tree with size 31.")
     void createsTreeWithSize31() {
       aBST tree = new aBST(4);
 
@@ -74,7 +74,7 @@ public class aBSTTest {
     }
 
     @Test
-    @DisplayName("Creates tree with size 63")
+    @DisplayName("Creates tree with size 63.")
     void createsTreeWithSize63() {
       aBST tree = new aBST(5);
 
@@ -82,13 +82,47 @@ public class aBSTTest {
     }
   }
 
-  // @Nested
-  // @DisplayName("FindKeyIndex")
-  // class FindKeyIndex {
-  //   @Test
-  //   @DisplayName("Creates tree with size 16")
-  //   void createsTreeWithSize16() {
+  @Nested
+  @DisplayName("FindKeyIndex")
+  class FindKeyIndex {
+    @Test
+    @DisplayName("Desired element is root.")
+    void desiredElementIsRoot() {
+      aBST tree = FakeaBST.buildTree();
 
-  //   }
-  // }
+      Integer index = tree.FindKeyIndex(50);
+
+      Assertions.assertEquals(0, index);
+    }
+
+    @Test
+    @DisplayName("Desired element is leaf.")
+    void desiredElementIsLeaf() {
+      aBST tree = FakeaBST.buildTree();
+
+      Integer index = tree.FindKeyIndex(31);
+
+      Assertions.assertEquals(9, index);
+    }
+
+    @Test
+    @DisplayName("Desired element is node.")
+    void desiredElementIsNode() {
+      aBST tree = FakeaBST.buildTree();
+
+      Integer index = tree.FindKeyIndex(62);
+
+      Assertions.assertEquals(5, index);
+    }
+
+    @Test
+    @DisplayName("Desired element does not exist.")
+    void desiredElementDoesNotExist() {
+      aBST tree = FakeaBST.buildTree();
+
+      Integer index = tree.FindKeyIndex(201);
+
+      Assertions.assertNull(index);
+    }
+  }
 }
