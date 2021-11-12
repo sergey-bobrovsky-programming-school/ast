@@ -5,18 +5,18 @@ class aBST {
 
   public aBST(int depth) {
     // правильно рассчитайте размер массива для дерева глубины depth:
-    int tree_size = this.getSize(depth, 0, 1);
+    int tree_size = this.getSize(depth, 0, 0);
 
     Tree = new Integer[ tree_size ];
     for(int i=0; i<tree_size; i++) Tree[i] = null;
   }
 
   private int getSize(int maxDepth, int depth, int size) {
-    if (depth >= maxDepth) {
+    if (depth > maxDepth) {
       return size;
     }
 
-    int newSize = size * 2;
+    int newSize = size * 2 + 1;
 
     int newDepth = depth + 1;
 
