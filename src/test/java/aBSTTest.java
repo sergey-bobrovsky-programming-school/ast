@@ -175,4 +175,98 @@ public class aBSTTest {
       Assertions.assertEquals(-13, index);
     }
   }
+
+  @Nested
+  @DisplayName("AddKey")
+  class AddKey {
+    @Test
+    @DisplayName("Adds key.")
+    void addsKey() {
+      aBST tree = FakeaBST.buildTree();
+
+      int index = tree.AddKey(20);
+
+      Assertions.assertEquals(3, index);
+    }
+
+    @Test
+    @DisplayName("Adds key.")
+    void addsKey1() {
+      aBST tree = FakeaBST.buildTree();
+
+      int index = tree.AddKey(64);
+
+      Assertions.assertEquals(12, index);
+    }
+
+    @Test
+    @DisplayName("Adds key.")
+    void addsKey2() {
+      aBST tree = FakeaBST.buildTree();
+
+      int index = tree.AddKey(80);
+
+      Assertions.assertEquals(13, index);
+    }
+
+    @Test
+    @DisplayName("Does not add existing element.")
+    void doesNotAddExistingElement() {
+      aBST tree = FakeaBST.buildTree();
+
+      int index = tree.AddKey(50);
+
+      Assertions.assertEquals(0, index);
+    }
+
+    @Test
+    @DisplayName("Does not add existing element.")
+    void doesNotAddExistingElement1() {
+      aBST tree = FakeaBST.buildTree();
+
+      int index = tree.AddKey(25);
+
+      Assertions.assertEquals(1, index);
+    }
+
+    @Test
+    @DisplayName("Does not add existing element.")
+    void doesNotAddExistingElement2() {
+      aBST tree = FakeaBST.buildTree();
+
+      int index = tree.AddKey(31);
+
+      Assertions.assertEquals(9, index);
+    }
+
+    @Test
+    @DisplayName("Does not add existing element.")
+    void doesNotAddExistingElement3() {
+      aBST tree = FakeaBST.buildTree();
+
+      int index = tree.AddKey(62);
+
+      Assertions.assertEquals(5, index);
+    }
+
+    @Test
+    @DisplayName("Does not add existing element.")
+    void doesNotAddExistingElement4() {
+      aBST tree = FakeaBST.buildTree();
+
+      int index = tree.AddKey(92);
+
+      Assertions.assertEquals(14, index);
+    }
+
+    @Test
+    @DisplayName("Does not add element bigger then tree.")
+    void doesNotAddElementBiggerThenTree() {
+      aBST tree = FakeaBST.buildTree();
+
+      int index = tree.AddKey(200);
+
+      Assertions.assertEquals(-1, index);
+    }
+  }
 }

@@ -64,7 +64,21 @@ class aBST {
 
   public int AddKey(int key) {
     // добавляем ключ в массив
-    return -1;
+    Integer index = FindKeyIndex(key);
+
+    if (index == null) {
+      return -1;
+    }
+
+    if (index > 0) {
+      return index;
+    }
+
+    int newIndex = index * (-1);
+
+    this.Tree[newIndex] = key;
+
+    return newIndex;
     // индекс добавленного/существующего ключа или -1 если не удалось
   }
 }
