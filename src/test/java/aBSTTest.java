@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Nested;
 
 class FakeaBST {
   public static aBST buildTree() {
-    aBST tree = new aBST(4);
+    aBST tree = new aBST(3);
 
     tree.Tree[0] = 50;
     tree.Tree[1] = 25;
@@ -123,6 +123,56 @@ public class aBSTTest {
       Integer index = tree.FindKeyIndex(201);
 
       Assertions.assertNull(index);
+    }
+
+    @Test
+    @DisplayName("Desired element does not exist but can be inserted.")
+    void desiredElementDoesNotExistButCanBeInserted() {
+      aBST tree = FakeaBST.buildTree();
+
+      Integer index = tree.FindKeyIndex(3);
+
+      Assertions.assertEquals(-3, index);
+    }
+
+    @Test
+    @DisplayName("Desired element does not exist but can be inserted1.")
+    void desiredElementDoesNotExistButCanBeInserted1() {
+      aBST tree = FakeaBST.buildTree();
+
+      Integer index = tree.FindKeyIndex(7);
+
+      Assertions.assertEquals(-3, index);
+    }
+
+    @Test
+    @DisplayName("Desired element does not exist but can be inserted2.")
+    void desiredElementDoesNotExistButCanBeInserted2() {
+      aBST tree = FakeaBST.buildTree();
+
+      Integer index = tree.FindKeyIndex(8);
+
+      Assertions.assertEquals(-3, index);
+    }
+
+    @Test
+    @DisplayName("Desired element does not exist but can be inserted3.")
+    void desiredElementDoesNotExistButCanBeInserted3() {
+      aBST tree = FakeaBST.buildTree();
+
+      Integer index = tree.FindKeyIndex(64);
+
+      Assertions.assertEquals(-12, index);
+    }
+
+    @Test
+    @DisplayName("Desired element does not exist but can be inserted4.")
+    void desiredElementDoesNotExistButCanBeInserted4() {
+      aBST tree = FakeaBST.buildTree();
+
+      Integer index = tree.FindKeyIndex(82);
+
+      Assertions.assertEquals(-13, index);
     }
   }
 }

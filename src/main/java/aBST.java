@@ -23,34 +23,38 @@ class aBST {
     return getSize(maxDepth, newDepth, newSize);
   }
 
-  private Integer FindByKey(int key, int index) {
-    if (index > Tree.length - 1) {
-      return null;
+  private boolean isMaxDepth(int index) {
+    int leftChildIndex = 2 * index + 1;
+    int rightChildIndex = 2 * index + 2;
+    int maxIndex = this.Tree.length - 1;
+
+    if (leftChildIndex > maxIndex && rightChildIndex > maxIndex) {
+      return true;
     }
 
+    return false;
+  }
+
+  private Integer FindByKey(int key, int index) {
     if (this.Tree[index] == null) {
-      return null;
+      return index * (-1);
     }
 
     if (key == this.Tree[index]) {
       return index;
     }
 
+    boolean maxDepth = isMaxDepth(index);
+
+    if (maxDepth) {
+      return null;
+    }
+
+    int nodeKey = this.Tree[index];
     int leftChildIndex = 2 * index + 1;
     int rightChildIndex = 2 * index + 2;
 
-    Integer leftChildResult = FindByKey(key, leftChildIndex);
-    Integer rightChildResult = FindByKey(key, rightChildIndex);
-
-    if (leftChildResult != null) {
-      return leftChildResult;
-    }
-
-    if (rightChildResult != null) {
-      return rightChildResult;
-    }
-
-    return null;
+    return FindByKey(key, key < nodeKey ? leftChildIndex : rightChildIndex);
   }
 
   public Integer FindKeyIndex(int key) {
